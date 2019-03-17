@@ -23,13 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.loginService.login(this.loginForm.value.username,this.loginForm.value.password)
-    // this.loginService.login(this.loginForm.value.username,this.loginForm.value.password).subscribe(
-    //   res =>{
-    //     debugger
-    //     console.log(res.headers.get('Set-Cookie'))
-    //   }
-    // );
+    this.loginService.login(this.loginForm.value.username,this.loginForm.value.password).subscribe(
+      res => {
+        this.loginService.getToken().subscribe((response: any) => {
+          localStorage.setItem("BONITA_TOKEN", response.headers.get("X-Bonita-API-Token"));
+          localStorage.setItem("USER_ID", response.body.user_id);
+        });
+      }
+    );
 
 
   }
