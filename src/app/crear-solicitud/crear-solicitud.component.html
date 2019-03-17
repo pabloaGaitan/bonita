@@ -1,0 +1,52 @@
+
+<button type="button" class="btn btn-dark" (click)="crear()">Dark</button>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <hr>
+    <hr>
+    <h1>Crear Solicitud</h1>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="tipo">
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" value="NO_PAGO"> No Pago
+      </label>
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" value="PAGO_ERRADO"> Pago Errado
+      </label>
+      
+    </div>
+    <hr>
+      <div>
+        <label for="solicitante">Solicitante:</label>
+        <input id="solicitante" type="text"  [(ngModel)]="solicitante"> 
+      </div>
+    <hr>
+    <label for="sel1">Tipo de Comisión:</label>
+    <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="tipoComision">
+      <option value="IMEI">Reconocimiento Logistico</option>
+      <option value="POSTPAGO">Postpago</option>
+      <option value="PREPAGO">Prepago</option>
+      <option value="BONOS">Bonos</option>
+      <option value="BONIFICACIONES">Bonificaciones</option>
+      <option value="BONOS">Bonos</option>
+    </select>
+    <br>
+    <div>
+      <label for="idComision" *ngIf="tipoComision == 'IMEI'">IMEI:</label>
+      <label for="idComision" *ngIf="tipoComision != 'IMEI'">Contrato:</label>
+      <input id="idComision" type="text"  [(ngModel)]="idComision"> 
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="comment">Descripción:</label>
+      <textarea class="form-control" rows="5" id="comment" [(ngModel)]="descripcion"></textarea>
+    </div>
+    <br>
+    <pre>{{descripcion}}</pre>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
+
+
+
