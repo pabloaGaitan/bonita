@@ -1,5 +1,3 @@
-
-<button type="button" class="btn btn-dark" (click)="crear()">Dark</button>
 <div class="row">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
@@ -13,13 +11,13 @@
       <label ngbButtonLabel class="btn-primary">
         <input ngbButton type="radio" value="PAGO_ERRADO"> Pago Errado
       </label>
-      
+
     </div>
     <hr>
-      <div>
-        <label for="solicitante">Solicitante:</label>
-        <input id="solicitante" type="text"  [(ngModel)]="solicitante"> 
-      </div>
+    <div>
+      <label for="solicitante">Solicitante:</label>
+      <input class="form-control" type="text" [(ngModel)]="solicitante">
+    </div>
     <hr>
     <label for="sel1">Tipo de Comisión:</label>
     <select class="form-control" id="sel1" name="sellist1" [(ngModel)]="tipoComision">
@@ -28,13 +26,12 @@
       <option value="PREPAGO">Prepago</option>
       <option value="BONOS">Bonos</option>
       <option value="BONIFICACIONES">Bonificaciones</option>
-      <option value="BONOS">Bonos</option>
     </select>
     <br>
     <div>
       <label for="idComision" *ngIf="tipoComision == 'IMEI'">IMEI:</label>
       <label for="idComision" *ngIf="tipoComision != 'IMEI'">Contrato:</label>
-      <input id="idComision" type="text"  [(ngModel)]="idComision"> 
+      <input class="form-control" id="idComision" type="text" [(ngModel)]="idComision">
     </div>
     <br>
     <div class="form-group">
@@ -43,10 +40,7 @@
     </div>
     <br>
     <pre>{{descripcion}}</pre>
+    <button [disabled]="loading" class="btn btn-primary" (click)="send()">Crear solicitud</button>
   </div>
   <div class="col-sm-2"></div>
 </div>
-
-
-
-

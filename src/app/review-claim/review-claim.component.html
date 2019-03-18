@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <hr>
+    <hr>
+    <h1>Revisar solicitud</h1>
+    <div>
+      <label><strong>Tipo de reclamación: </strong>
+        <p *ngIf="claim.type === 'NO_PAGO'">No pago</p>
+        <p *ngIf="claim.type === 'PAGO_ERRADO'">Pago errado</p>
+      </label>
+    </div>
+    <div>
+      <label for="solicitante"><strong>Solicitante:</strong></label>
+      <input disabled class="form-control" type="text" [(ngModel)]="requesterName">
+    </div>
+    <label><strong>Tipo de Comisión: </strong>
+      <p *ngIf="claim.assignment === 'IMEI'">Reconocimiento Logistico</p>
+      <p *ngIf="claim.assignment === 'POSTPAGO'">Postpago</p>
+      <p *ngIf="claim.assignment === 'PREPAGO'">Prepago</p>
+      <p *ngIf="claim.assignment === 'BONOS'">Bonos</p>
+      <p *ngIf="claim.assignment === 'BONIFICACIONES'">Bonificaciones</p>
+    </label>
+    <div>
+      <label for="idComision" *ngIf="claim.assignment == 'IMEI'"><strong>IMEI:</strong></label>
+      <label for="idComision" *ngIf="claim.assignment != 'IMEI'"><strong>Contrato:</strong></label>
+      <input disabled class="form-control" id="idComision" type="text" [(ngModel)]="claim.assignmentId">
+    </div>
+    <div class="form-group">
+      <label for="comment"><strong>Descripción:</strong></label>
+      <textarea disabled class="form-control" rows="5" id="comment" [(ngModel)]="claim.description"></textarea>
+    </div>
+    <hr>
+    <hr>
+    <h2>Acción a tomar</h2>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="isForReview">
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" value="false"> No requiere revisión
+      </label>
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" value="true"> Requiere revisión
+      </label>
+    </div>
+    <br><br>
+    <div *ngIf="isForReview == 'false'" class="form-group">
+      <label for="solution"><strong>Solución a enviar:</strong></label>
+      <textarea class="form-control" rows="5" id="solution" [(ngModel)]="solution"></textarea>
+    </div>
+    <button [disabled]="loading" class="btn btn-primary" (click)="submit()">Enviar</button>
+  </div>
+  <div class="col-sm-2"></div>
+</div>

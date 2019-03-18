@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-2">
+      <button type="button" class="btn btn-primary" (click)="logout()">Cerrar sesión</button>
+  </div>
+  <div class="col-sm-8">
+    <button type="button" *ngIf="username === 'ventas'" class="btn btn-dark" (click)="crear()">Crear solicitud</button>
+    <div *ngIf="username !== 'ventas'">
+      <h1>Tareas pendientes</h1>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre de tarea</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; index as i">
+            <th scope="row">{{ task.id }}</th>
+            <td>{{ task.displayName }}</td>
+            <td><a [routerLink]="start(task.id, task.caseId, task.displayName)">Iniciar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

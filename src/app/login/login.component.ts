@@ -1,6 +1,7 @@
 import { LoginServiceService } from './../services/login-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService : LoginServiceService,
-    private formBuilder: FormBuilder) { }
+  constructor(
+    private loginService : LoginServiceService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) { }
   username : string
   password : string
   loginForm: FormGroup;
@@ -28,6 +32,8 @@ export class LoginComponent implements OnInit {
         this.loginService.getToken().subscribe((response: any) => {
           localStorage.setItem("BONITA_TOKEN", response.headers.get("X-Bonita-API-Token"));
           localStorage.setItem("USER_ID", response.body.user_id);
+          localStorage.setItem("USER_NAME", response.body.user_name);
+          this.router.navigateByUrl("/home");
         });
       }
     );

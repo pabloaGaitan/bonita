@@ -1,5 +1,6 @@
 import { LoginServiceService } from './../services/login-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-crear-solicitud',
@@ -8,30 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearSolicitudComponent implements OnInit {
 
-  constructor(private servicio:LoginServiceService) { }
+  constructor(
+    private servicio:LoginServiceService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   tipo : string = 'NO_PAGO';
-  solicitante : string
-  tipoComision : string = 'POST PAGO';
-  idComision : string
-  descripcion : string;
+  solicitante : string = "";
+  tipoComision : string = 'POSTPAGO';
+  idComision : string = "";
+  descripcion : string = "";
 
   taskId: string;
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe( params => {
+      this.taskId = params['taskId'];
+    });
   }
 
-  crear(){
-    this.servicio.crearSolicitud().subscribe(
-      (res: any) => {
-        this.servicio.getHumanTask(res.caseId).subscribe(response => {
-          this.taskId = response[0].id;
-          this.servicio.asignarCaso(this.taskId).subscribe(_ => {
-            // mover al usuario a la pantalla del formulario
-          })
-        });
-      }
-
-    );
+  send() {
+    this.servicio.executeTask(this.taskId, {
+      type: this.tipo,
+      requester: this.solicitante,
+      assignment: this.tipoComision,
+      assignmentId: this.idComision,
+      description: this.descripcion
+    }).subscribe( res => {
+      alert(`Se ha creado la solicitud exitosamente`);
+      setTimeout(() => {
+        this.router.navigateByUrl("/home");
+      }, 2000);
+    })
   }
 }

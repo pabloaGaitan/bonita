@@ -24,7 +24,7 @@ export class LoginServiceService {
   crearSolicitud(){
     let headers = new HttpHeaders()
       .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
-    return this.http.post(this.url + "API/bpm/process/7455610800192491359/instantiation", {},{
+    return this.http.post(this.url + "API/bpm/process/8397976090339383333/instantiation", {},{
       headers,
       withCredentials: true
     });
@@ -46,7 +46,54 @@ export class LoginServiceService {
     return this.http.put(`${this.url}API/bpm/humanTask/${taskId}`, { assigned_id: localStorage.getItem("USER_ID") }, {
       withCredentials: true,
       headers
+    });
+  }
+
+  executeTask(taskId, data) {
+    let headers = new HttpHeaders()
+      .append("Content-Type", "application/json")
+      .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
+    return this.http.post(`${this.url}API/bpm/userTask/${taskId}/execution`, data, {
+      withCredentials: true,
+      headers
+    });
+  }
+
+  getListTasks() {
+    let headers = new HttpHeaders()
+      .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
+    const userId = localStorage.getItem("USER_ID");
+    return this.http.get(`${this.url}API/bpm/humanTask?c=50&d=rootContainerId&f=state%3Dready&f=user_id%3D${userId}&o=displayName+ASC&p=0`,{
+      headers,
+      withCredentials: true
+    });
+  }
+
+  getContext(taskId) {
+    let headers = new HttpHeaders()
+      .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
+    return this.http.get(`${this.url}API/bpm/userTask/${taskId}/context`, {
+      headers,
+      withCredentials: true
     })
+  }
+
+  getDataModel(path) {
+    let headers = new HttpHeaders()
+      .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
+    return this.http.get(`${this.url}${path}`, {
+      headers,
+      withCredentials: true
+    });
+  }
+
+  getCaseVariable(caseId, variable) {
+    let headers = new HttpHeaders()
+      .append("X-Bonita-API-Token", localStorage.getItem("BONITA_TOKEN"));
+    return this.http.get(`${this.url}API/bpm/caseVariable/${caseId}/${variable}`, {
+      headers,
+      withCredentials: true
+    });
   }
 }
 
