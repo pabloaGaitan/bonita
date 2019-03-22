@@ -39,11 +39,14 @@ export class ReviewClaimComponent implements OnInit {
   }
 
   submit() {
+    let obj;
+    if(this.isForReview === "true"){
+      obj = {isForReview : this.isForReview === 'true',solution :"" , notes:this.solution}
+    }else{
+      obj = {isForReview : this.isForReview === 'true' , solution : this.solution , notes:""}
+    }
     this.service.asignarCaso(this.taskId).subscribe(resp => {
-      this.service.executeTask(this.taskId, {
-        isForReview: this.isForReview === 'true',
-        solution: this.solution
-      }).subscribe(res => {
+      this.service.executeTask(this.taskId, obj).subscribe(res => {
         alert(`Operación realizada exitosamente`);
         setTimeout(() => {
           this.router.navigateByUrl("/home");

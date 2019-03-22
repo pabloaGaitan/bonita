@@ -31,22 +31,18 @@
       <textarea disabled class="form-control" rows="5" id="comment" [(ngModel)]="claim.description"></textarea>
     </div>
     <hr>
-    <hr>
-    <h2>Acción a tomar</h2>
-    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="isForReview">
-      <label ngbButtonLabel class="btn-primary">
-        <input ngbButton type="radio" value="false"> No requiere revisión
-      </label>
-      <label ngbButtonLabel class="btn-primary">
-        <input ngbButton type="radio" value="true"> Requiere revisión
-      </label>
-    </div>
-    <br><br>
-    
-    <label for="solution"><strong>Solución a enviar:</strong></label>
-    <textarea class="form-control" rows="5" id="solution" [(ngModel)]="solution"></textarea>
-    
+    <hr>    
+    <label for="solution"><strong>Notas del Agente de Comisiones:</strong></label>
+    <textarea disabled class="form-control" rows="5" id="solution" [(ngModel)]="solution"></textarea>
+
+    <label for="notas_ajuste"><strong>Solución:</strong></label>
+    <textarea class="form-control" rows="5" id="notas_ajuste" [(ngModel)]="notas_solucion"></textarea>
     <button [disabled]="loading" class="btn btn-primary" (click)="submit()">Enviar</button>
+    
+    
   </div>
-  <div class="col-sm-2"></div>
+  <div class="col-sm-2">
+
+  </div>
+
 </div>

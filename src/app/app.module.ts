@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { ReviewClaimComponent } from './review-claim/review-claim.component';
 
 import { AuthGuard } from './guards/auth-guard.service';
+import { RevisonSoporteComponent } from './revison-soporte/revison-soporte.component';
+import { DarRespuestaComponent } from './dar-respuesta/dar-respuesta.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AuthGuard } from './guards/auth-guard.service';
     LoginComponent,
     CrearSolicitudComponent,
     HomeComponent,
-    ReviewClaimComponent
+    ReviewClaimComponent,
+    RevisonSoporteComponent,
+    DarRespuestaComponent
   ],
   imports: [
     BrowserModule,

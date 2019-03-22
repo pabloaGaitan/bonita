@@ -12,7 +12,9 @@ export class HomeComponent implements OnInit {
   tasks: any[] = [];
 
   confLinks = {
-    "4. Revisar Solicitud ": "/review-claim"
+    "4. Revisar Solicitud ": "/review-claim",
+    "7. Realizar ajuste" : "/revision-soporte",
+    "9. Dar Respuesta" : "/dar-respuesta"
   }
 
   constructor(

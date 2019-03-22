@@ -17,7 +17,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let task of tasks; index as i">
-            <th scope="row">{{ task.id }}</th>
+            <th scope="row">{{ task.caseId }}</th>
             <td>{{ task.displayName }}</td>
             <td><a [routerLink]="start(task.id, task.caseId, task.displayName)">Iniciar</a></td>
           </tr>
